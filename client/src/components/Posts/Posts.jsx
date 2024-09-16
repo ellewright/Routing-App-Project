@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import data from "../../../../api/db.json"
+import api from "../../../../api/db.json"
 import { useEffect, useState } from "react"
 
 export default function Posts() {
@@ -12,15 +12,28 @@ export default function Posts() {
 }
 
 function PostCard() {
-    const [posts, setPosts] = useState([])
+    const [data, setData] = useState({})
 
     useEffect(() => {
-        setPosts(data)
+        setData(api)
     }, [])
 
+    const posts = data?.posts || []
+    console.log(posts)
+
     return (
-        <>
-            {/* posts will be rendered here */}
-        </>
+        <div>
+            {posts.length > 0 ? (
+                posts.map((post) => (
+                    <div key={post.id} className="post-card">
+                        <h2>{post.title}</h2>
+                        <p>{post.body}</p>
+                        <Link to={`/posts/${post.id}`}>Read More</Link>
+                    </div>
+                ))
+            ) : (
+                <p>Loading posts...</p>
+            )}
+        </div>
     )
 }

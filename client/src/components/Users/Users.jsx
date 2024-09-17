@@ -3,10 +3,10 @@ import { getUsers } from "../../api/users"
 
 function Users() {
     return (
-        <div className="container">
+        <>
             <h1 className="page-title">Users</h1>
             <UserCard />
-        </div>
+        </>
     )
 }
 

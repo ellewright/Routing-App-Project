@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigation } from "react-router-dom"
 
 export default function Navbar() {
     return (
@@ -20,10 +20,18 @@ export default function Navbar() {
 }
 
 export function NavLayout() {
+    const { state } = useNavigation()
+    const isLoading = state === "loading"
+
     return (
         <>
             <Navbar />
-            <Outlet />
+            {isLoading &&
+                <div className="loading-spinner" />
+            }
+            <div className={`container ${isLoading ? "loading" : ""}`}>
+                <Outlet />
+            </div>
         </>
     )
 }

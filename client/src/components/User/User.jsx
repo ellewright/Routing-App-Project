@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom"
 import api from "../../../../api/db.json"
-import "./User.css"
 
 export default function User() {
 

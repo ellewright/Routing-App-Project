@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react"
 import api from "../../../../api/db.json"
-import "./Todos.css"
 
 export default function Todos() {
     return (
-        <>
-            <h1>Todos</h1>
+        <div className="container">
+            <h1 className="page-title">Todos</h1>
             <TodoCard />
-        </>
+        </div>
     )
 }
 
@@ -22,16 +21,16 @@ function TodoCard() {
     console.log(todos)
 
     return (
-        <div>
+        <ul>
             {todos.length > 0 ? (
                 todos.map((todo) => (
-                    <div key={todo.id} className={todo.completed === true ? "completed" : ""}>
-                        <h2>{todo.title}</h2>
-                    </div>
+                    <li key={todo.id} className={todo.completed === true ? "strike-through" : ""}>
+                        {todo.title}
+                    </li>
                 ))
             ) : (
                 <p>Loading...</p>
             )}
-        </div>
+        </ul>
     )
 }

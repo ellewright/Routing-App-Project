@@ -4,10 +4,10 @@ import { useEffect, useState } from "react"
 
 export default function Users() {
     return (
-        <>
-            <h1>Users</h1>
+        <div className="container">
+            <h1 className="page-title">Users</h1>
             <UserCard />
-        </>
+        </div>
     )
 }
 
@@ -22,15 +22,19 @@ function UserCard() {
     console.log(users)
 
     return (
-        <div>
+        <div className="card-grid">
             {users.length > 0 ? (
                 users.map((user) => (
-                    <div key={user.id} className="user-card">
-                        <h2>{user.name}</h2>
-                        <p>{user.company.name}</p>
-                        <p>{user.email}</p>
-                        <p>{user.website}</p>
-                        <Link to={`/users/${user.id}`}>View User</Link>
+                    <div key={user.id} className="card">
+                        <div className="card-header">{user.name}</div>
+                        <div className="card-body">
+                            <div>{user.company.name}</div>
+                            <div>{user.email}</div>
+                            <div>{user.website}</div>
+                        </div>
+                        <div className="card-footer">
+                            <Link className="btn" to={`/users/${user.id}`}>View User</Link>
+                        </div>
                     </div>
                 ))
             ) : (

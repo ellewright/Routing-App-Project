@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import api from "../../../../api/db.json"
+import "./User.css"
 
 export default function User() {
 
@@ -11,13 +12,13 @@ export default function User() {
     }
 
     return (
-        <>
-            <h2>{user.name}</h2>
-            <p>{user.company.name}</p>
-            <p>{user.email}</p>
-            <p>{user.website}</p>
-            <p>{user.address.street} {user.address.suite}</p>
-            <p>{user.address.city}, {user.address.zipcode}</p>
-        </>
+        <div class="container">
+            <h1 class="page-title">{user.name}</h1>
+            <div className="page-subtitle">{user.email}</div>
+            <div><b>Company:</b> {user.company.name}</div>
+            <div><b>Website:</b> {user.website}</div>
+            <div><b>Address:</b> {user.address.street} {user.address.suite}</div>
+            <div>{user.address.city}, {user.address.zipcode}</div>
+        </div>
     )
 }

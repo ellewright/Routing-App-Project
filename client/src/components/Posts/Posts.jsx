@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom"
 import api from "../../../../api/db.json"
 import { useEffect, useState } from "react"
+// import "./Posts.css"
 
 export default function Posts() {
     return (
-        <>
-            <h1>Posts</h1>
+        <div className="container">
+            <h1 className="page-title">Posts</h1>
             <PostCard />
-        </>
+        </div>
     )
 }
 
@@ -22,13 +23,17 @@ function PostCard() {
     console.log(posts)
 
     return (
-        <div>
+        <div className="card-grid">
             {posts.length > 0 ? (
                 posts.map((post) => (
-                    <div key={post.id} className="post-card">
-                        <h2>{post.title}</h2>
-                        <p>{post.body}</p>
-                        <Link to={`/posts/${post.id}`}>Read More</Link>
+                    <div key={post.id} className="card">
+                        <div className="card-header">{post.title}</div>
+                        <div className="card-body">
+                            <div className="card-preview-text">{post.body}</div>
+                        </div>
+                        <div className="card-footer">
+                            <Link className="btn" to={`/posts/${post.id}`}>Read More</Link>
+                        </div>
                     </div>
                 ))
             ) : (

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import api from "../../../../api/db.json"
+import { Link } from "react-router-dom"
 
 export default function Post() {
 
@@ -11,9 +12,12 @@ export default function Post() {
     }
 
     return (
-        <>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-        </>
+        <div className="container">
+            <h1 className="page-title">{post.title}</h1>
+            <span className="page-subtitle">
+                By: <Link to=""></Link>
+            </span>
+            <div>{post.body}</div>
+        </div>
     )
 }

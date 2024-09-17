@@ -1,9 +1,11 @@
 import { Link, Outlet } from "react-router-dom"
+import "./Navbar.css"
 
 export default function Navbar() {
     return (
-        <nav>
-            <ul>
+        <nav className="top-nav">
+            <div class="nav-text-large">My App</div>
+            <ul className="nav-list">
                 <li>
                     <Link to="/posts">Posts</Link>
                 </li>

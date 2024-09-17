@@ -1,28 +1,28 @@
-import { createBrowserRouter } from "react-router-dom"
-import Posts from "../Posts/Posts"
-import Users from "../Users/Users"
-import Todos from "../Todos/Todos"
-import Navbar, { NavLayout } from "../Navbar/Navbar"
-import User from "../User/User"
-import Post from "../Post/Post"
+import { createBrowserRouter, Navigate } from "react-router-dom"
+import { postsRoute } from "../Posts/Posts"
+import { usersRoute } from "../Users/Users"
+import { todosRoute } from "../Todos/Todos"
+import { NavLayout } from "../Navbar/Navbar"
+import { postRoute } from "../Posts/Post/Post"
+import { userRoute } from "../Users/User/User"
 
 export const router = createBrowserRouter([
     {
         element: <NavLayout />, children: [
             {
                 path: "/posts", children: [
-                    { index: true, element: <Posts /> },
-                    { path: ":postId", element: <Post /> }
+                    { index: true, ...postsRoute },
+                    { path: ":postId", ...postRoute }
                 ]
             },
             {
                 path: "/users", children: [
-                    { index: true, element: <Users /> },
-                    { path: ":userId", element: <User /> }
+                    { index: true, ...usersRoute },
+                    { path: ":userId", ...userRoute }
                 ]
             },
-            { path: "/todos", element: <Todos /> },
-            { path: "*", element: <Posts /> }
+            { path: "/todos", ...todosRoute },
+            { path: "*", element: <Navigate to="/posts" /> }
         ]
     },
 ])

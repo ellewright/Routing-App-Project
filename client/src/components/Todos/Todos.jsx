@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
-import api from "../../../../api/db.json"
+import { useLoaderData } from "react-router-dom"
+import { getTodos } from "../../api/todos"
 
-export default function Todos() {
+function Todos() {
     return (
         <div className="container">
             <h1 className="page-title">Todos</h1>
@@ -11,26 +11,24 @@ export default function Todos() {
 }
 
 function TodoCard() {
-    const [data, setData] = useState({})
-
-    useEffect(() => {
-        setData(api)
-    }, [])
-
-    const todos = data?.todos || []
-    console.log(todos)
+    const todos = useLoaderData()
 
     return (
         <ul>
-            {todos.length > 0 ? (
-                todos.map((todo) => (
-                    <li key={todo.id} className={todo.completed === true ? "strike-through" : ""}>
-                        {todo.title}
-                    </li>
-                ))
-            ) : (
-                <p>Loading...</p>
-            )}
+            {todos.map((todo) => (
+                <li key={todo.id} className={todo.completed === true ? "strike-through" : ""}>
+                    {todo.title}
+                </li>
+            ))}
         </ul>
     )
+}
+
+function loader({ request: { signal } }) {
+    return getTodos({ signal })
+}
+
+export const todosRoute = {
+    loader,
+    element: <Todos />
 }

@@ -1,15 +1,9 @@
-import { useParams } from "react-router-dom"
-import api from "../../../../api/db.json"
+import { useLoaderData } from "react-router-dom"
 import { Link } from "react-router-dom"
+import { getPost } from "../../../api/posts"
 
-export default function Post() {
-
-    const { postId } = useParams()
-    const post = api.posts.find(post => post.id === parseInt(postId))
-
-    if (!post) {
-        return <p>Post not found</p>;
-    }
+function Post() {
+    const post = useLoaderData()
 
     return (
         <div className="container">
@@ -20,4 +14,13 @@ export default function Post() {
             <div>{post.body}</div>
         </div>
     )
+}
+
+function loader({ request: { signal }, params }) {
+    return getPost(params.postId, { signal })
+}
+
+export const postRoute = {
+    loader,
+    element: <Post />
 }

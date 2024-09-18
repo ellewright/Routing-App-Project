@@ -5,6 +5,8 @@ import { todosRoute } from "../Todos/Todos"
 import { NavLayout } from "../Navbar/Navbar"
 import { postRoute } from "../Posts/Post/Post"
 import { userRoute } from "../Users/User/User"
+import { newPostRoute } from "../Posts/NewPost/NewPost"
+import { editPostRoute } from "../Posts/NewPost/EditPost"
 
 export const router = createBrowserRouter([
     {
@@ -17,7 +19,14 @@ export const router = createBrowserRouter([
                     {
                         path: "/posts", children: [
                             { index: true, ...postsRoute },
-                            { path: ":postId", ...postRoute }
+                            {
+                                path: ":postId",
+                                children: [
+                                    { index: true, ...postRoute },
+                                    { path: "edit", ...editPostRoute }
+                                ],
+                            },
+                            { path: "new", ...newPostRoute }
                         ]
                     },
                     {
